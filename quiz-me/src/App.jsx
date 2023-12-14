@@ -1,34 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import { createContext, useEffect, useState } from 'react'
 import './App.css'
+import Home from './components/Home'
+import Quiz from './components/Quiz'
+import Result from './components/Result'
+
+// Pass theme to all components
+
+export const ThemeContext = createContext()
 
 function App() {
-  const [count, setCount] = useState(0)
+
+
+  const [showHome,setShowHome] = useState(true)
+  const [showQuiz,setShowQuiz] = useState(false)
+  const [showResult,setShowResult] = useState(false)
+
+  // Score and Theme
+
+  const [darkTheme,setDarkTheme] = useState(false)
+  const [score,setScore] = useState(0)
+
+
+  // Update Theme
+
+  useEffect(() => {
+    darkTheme ? document.body.classList.add("dark") : document.body.classList.remove("dark")
+  },[darkTheme])
+
+  const toggleTheme = () => {
+    setDarkTheme((prevTheme) => !prevTheme)
+  }
+
+  // Conditional Rendering
+
+  const displayHome = () => {
+    setScore(0)
+    setShowResult(false)
+    setShowHome(true)
+  }
+
+  const displayQuiz = () => {
+    setShowHome(false)
+    setShowQuiz(true)
+  }
+
+  const displayResult = () => {
+    setShowResult(true)
+    setShowQuiz(false)
+  }
+
+  // Increase score
+
+  const updateScore = () => {
+    setScore((prevScore) => prevScore+1)
+    console.log(score)
+  } 
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+    <ThemeContext.Provider value={{darkTheme,toggleTheme}}>
+
+      {showHome && <Home displayQuiz={displayQuiz} />}
+      {showQuiz && <Quiz showResult={displayResult} updateScore={updateScore} />}
+      {showResult && <Result displayHome={displayHome} score={score} />}
+      
+    </ThemeContext.Provider>
   )
 }
 
