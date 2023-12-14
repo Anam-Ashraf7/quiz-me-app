@@ -1,6 +1,9 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../App'
-
+import logo from "../assets/Logo.png"
+import dark from "../assets/dark-logo.svg"
+import sun from "../assets/sun.svg"
+import moon from "../assets/moon.svg"
 
 function NavBar() {
 
@@ -10,12 +13,12 @@ function NavBar() {
         <div>
             {darkTheme ?
             (<nav>
-                <img src="../src/assets/dark-logo.svg" alt="" />
-                <img onClick={toggleTheme} id='icon' src="../src/assets/sun.svg" alt="" />
+                <img src={dark} alt="" />
+                <img onClick={toggleTheme} id='icon' src={sun} alt="" />
             </nav>):
             (<nav>
-                <img src="../src/assets/Logo.png" alt="" />
-                <img onClick={toggleTheme} id='icon' src="../src/assets/moon.svg" alt="" />
+                <img src={logo} alt="" />
+                <img onClick={toggleTheme} id='icon' src={moon} alt="" />
             </nav>)
             }
         </div>

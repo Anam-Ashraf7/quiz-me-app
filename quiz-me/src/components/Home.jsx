@@ -1,16 +1,14 @@
 
 import Navbar from './Navbar'
+import bgm from "../assets/Background.svg"
 
 function Home(props) {
   return (
     <div>
         <Navbar/>
         <div>
-            <div id='banner' style={{backgroundImage:`url("../src/assets/Background.svg")`}}>
+            <div id='banner' style={{backgroundImage:`url(${bgm})`}}>
                 <p>Test your knowledge,<br></br>anytime, anywhere.</p>
-
-                {/* Render Quiz Component */}
-
                 <button onClick={props.displayQuiz}>Play Now!</button> 
             </div>
         </div>

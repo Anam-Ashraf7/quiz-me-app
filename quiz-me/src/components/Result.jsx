@@ -1,5 +1,7 @@
 
 import questions from './Questions'
+import win from "../assets/win.svg"
+import study from "../assets/Study.svg"
 
 function Result(props) {
 
@@ -8,12 +10,12 @@ function Result(props) {
         {props.score > 2 ? 
         ( <>
             <p>Congratulations!</p> 
-            <img src="../src/assets/win.svg" alt="" />
+            <img src={win} alt="" />
         </> )
         :
         ( <>
             <p>Better Luck Next Time!</p>
-            <img src="../src/assets/Study.svg" alt="" />
+            <img src={study} alt="" />
         </> )
         }
         
